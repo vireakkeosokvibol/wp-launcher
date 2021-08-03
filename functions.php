@@ -5,13 +5,16 @@ if (!defined('ABSPATH')) {
   die('Do not open this file directly.');
 }
 
+require_once(dirname(__FILE__) . '/vendor/autoload.php');
 require_once(dirname(__FILE__) . '/classes/customizer.php');
+require_once(dirname(__FILE__) . '/classes/navmenu.php');
 
 /**
  * 
  * Add custom javascript and css.
  * 
  */
+
 function add_scripts()
 {
   wp_enqueue_style('bootstrap', get_template_directory_uri() . '/assets/css/bootstrap.min.css', array(), '5.0.2', 'all');
@@ -27,13 +30,12 @@ add_action('wp_enqueue_scripts', 'add_scripts');
  * Get menu and display menu in array format by menu's name.
  * 
  */
-function get_menu($menu)
+function wp_launcher_get_menu($menu)
 {
   $locations = get_nav_menu_locations();
   $menu_id = $locations[$menu];
   return !empty($menu_id) ? wp_get_nav_menu_items($menu_id) : array();
 }
-
 add_theme_support('menus');
 
 /**
