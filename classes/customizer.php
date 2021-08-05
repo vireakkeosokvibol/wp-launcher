@@ -52,16 +52,17 @@ class LAUNCHER_CUSTOMIZER
       'panel' => 'header-panel' 
     ));
 
-    $wp_customize->add_setting('header-display', array(
-      'default' => 'No',
+    $wp_customize->add_setting('header-menu-arrange', array(
+      'default' => 'flex-start',
+      'transport'   => 'refresh',
     ));
 
-    $wp_customize->add_control(new WP_Customize_Control($wp_customize, 'header-section-display', array(
-      'label' => 'Test',
+    $wp_customize->add_control(new WP_Customize_Control($wp_customize, 'header-menu-arrange', array(
+      'label' => 'Arrange Menu',
       'section' => 'header-navigation',
-      'settings' => 'header-display',
+      'settings' => 'header-menu-arrange',
       'type' => 'select',
-      'choices' => array('No' => 'No', 'Yes' => 'Yes')
+      'choices' => array('flex-start' => 'Left', 'center' => 'Center', 'flex-end' => 'Right')
     )));
   }
 }

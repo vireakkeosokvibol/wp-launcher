@@ -17,11 +17,11 @@ require_once(dirname(__FILE__) . '/classes/navmenu.php');
 
 function add_scripts()
 {
-  wp_enqueue_style('bootstrap', get_template_directory_uri() . '/assets/css/bootstrap.min.css', array(), '5.0.2', 'all');
+  // wp_enqueue_style('bootstrap', get_template_directory_uri() . '/assets/css/bootstrap.min.css', array(), '5.0.2', 'all');
 
-  wp_enqueue_script('jquery', get_template_directory_uri() . '/assets/js/jquery.min.js', array(), '3.7.1', true);
-  wp_enqueue_script('bootstrap', get_template_directory_uri() . '/assets/js/bootstrap.min.js', array(), '5.0.2', true);
-  wp_enqueue_script('custom', get_template_directory_uri() . '/assets/js/custom.js', array(), '0.1', true);
+  // wp_enqueue_script('jquery', get_template_directory_uri() . '/assets/js/jquery.min.js', array(), '3.7.1', true);
+  // wp_enqueue_script('bootstrap', get_template_directory_uri() . '/assets/js/bootstrap.min.js', array(), '5.0.2', true);
+  wp_enqueue_script('main', get_template_directory_uri() . '/assets/dist/js/main.js', array(), '0.1', true);
 }
 add_action('wp_enqueue_scripts', 'add_scripts');
 
