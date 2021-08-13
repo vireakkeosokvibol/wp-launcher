@@ -5,23 +5,53 @@ if (!defined('ABSPATH')) {
   die('Do not open this file directly.');
 }
 
-require_once(dirname(__FILE__) . '/vendor/autoload.php');
-require_once(dirname(__FILE__) . '/classes/customizer.php');
-// require_once(dirname(__FILE__) . '/classes/navmenu.php');
+require_once(get_template_directory() . '/vendor/autoload.php');
+require_once(get_template_directory() . '/admin/customize/controls/textarea.php');
+
+if (!function_exists('wp_launcher_setup')) {
+  function wp_launcher_setup()
+  {
+    /*
+		 * Let WordPress manage the document title.
+		 * This theme does not use a hard-coded <title> tag in the document head,
+		 * WordPress will provide it for us.
+		 */
+    add_theme_support('title-tag');
+
+    /**
+     * 
+     * Enable menu support on theme option.
+     * 
+     */
+    register_nav_menus(array(
+      'header-menu' => __('Header menu', 'theme'),
+      'footer-menu' => __('Footer menu', 'theme'),
+    ));
+  }
+}
+add_action('after_setup_theme', 'wp_launcher_setup');
 
 /**
  * 
- * Add custom javascript and css.
+ * Add custom javascript and css to wp-admin page.
  * 
  */
+function add_admin_scripts()
+{
+  // wp_enqueue_style('bootstrap', get_template_directory_uri() . '/assets/css/bootstrap.min.css', array(), '0.1');
+  // wp_enqueue_script('jquery-min', get_template_directory_uri() . '/assets/js/jquery.min.js', array(), '0.1');
+  // wp_enqueue_script('main', get_template_directory_uri() . '/assets/js/main.js', array(), '0.1');
+}
+add_action('admin_enqueue_scripts', 'add_admin_scripts');
 
+/**
+ * 
+ * Add custom javascript and css to theme.
+ * 
+ */
 function add_scripts()
 {
-  // wp_enqueue_style('bootstrap', get_template_directory_uri() . '/assets/css/bootstrap.min.css', array(), '5.0.2', 'all');
-
-  // wp_enqueue_script('jquery', get_template_directory_uri() . '/assets/js/jquery.min.js', array(), '3.7.1', true);
-  // wp_enqueue_script('bootstrap', get_template_directory_uri() . '/assets/js/bootstrap.min.js', array(), '5.0.2', true);
-  wp_enqueue_script('main', get_template_directory_uri() . '/assets/dist/js/main.js', array(), '0.1', true);
+  wp_enqueue_style('bootstrap', get_template_directory_uri() . '/assets/css/bootstrap.min.css', array(), '0.1');
 }
 add_action('wp_enqueue_scripts', 'add_scripts');
 
@@ -72,28 +102,7 @@ function wp_launcher_display_menu($menu_name)
   }
 }
 
-/**
- * 
- * Enable menu support on theme option.
- * 
- */
-register_nav_menus(array(
-  'header-menu' => __('Header menu', 'theme'),
-  'footer-menu' => __('Footer menu', 'theme'),
-));
-
-/**
- * 
- * Eanble header support on theme option.
- * 
- */
-function custom_header_option()
-{
-  $args = array();
-  add_theme_support('custom-header', $args);
-}
-add_action('after_setup_theme', 'custom_header_option');
-
+// Add custom css from theme options
 function mytheme_customize_css()
 {
 ?>
@@ -117,3 +126,36 @@ function mytheme_customize_css()
 <?php
 }
 add_action('wp_head', 'mytheme_customize_css');
+
+/**
+ * 
+ * Customizer section
+ * 
+ */
+function wp_launcher_customize_register($wp_customize)
+{
+  $wp_customize->add_panel('wp-launcher-customize-header-panel', array(
+    'title' => __('Header Settings', 'wp-launcher'),
+    'description' => __('Header settings configuration and customization', 'wp-launcher'),
+    'panel' => 'wp_launcher_customize_header_panel'
+  ));
+
+  $wp_customize->add_section('wp-launcher-customize-header-navigation', array(
+    'title' => 'Header navigations',
+    'description' => 'Header navigation configuration and customization',
+    'panel' => 'wp-launcher-customize-header-panel',
+  ));
+
+  $wp_customize->add_setting('wp-launcher-customize-header-menu-arrange', array(
+    'default' => 'test',
+    'transport'   => 'refresh',
+  ));
+
+  $wp_customize->add_control(new WP_Launcher_Customize_Control_Textarea($wp_customize, 'wp-launcher-customize-header-navigation', array(
+    'label' => 'Designer',
+    'section' => 'wp-launcher-customize-header-navigation',
+    'settings' => 'wp-launcher-customize-header-menu-arrange',
+    'type' => 'wp-launcher-textarea',
+  )));
+}
+add_action('customize_register', 'wp_launcher_customize_register');
