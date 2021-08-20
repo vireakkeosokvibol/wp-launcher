@@ -6,7 +6,7 @@ if (!defined('ABSPATH')) {
 }
 
 require_once(get_template_directory() . '/vendor/autoload.php');
-require_once(get_template_directory() . '/admin/customize/controls/textarea.php');
+require_once(get_template_directory() . '/admin/customize/controls/header-designer.php');
 
 if (!function_exists('wp_launcher_setup')) {
   function wp_launcher_setup()
@@ -38,7 +38,7 @@ add_action('after_setup_theme', 'wp_launcher_setup');
  */
 function add_admin_scripts()
 {
-  // wp_enqueue_style('bootstrap', get_template_directory_uri() . '/assets/css/bootstrap.min.css', array(), '0.1');
+  wp_enqueue_style('bootstrap', get_template_directory_uri() . '/assets/css/bootstrap.min.css', array(), '0.1');
   // wp_enqueue_script('jquery-min', get_template_directory_uri() . '/assets/js/jquery.min.js', array(), '0.1');
   // wp_enqueue_script('main', get_template_directory_uri() . '/assets/js/main.js', array(), '0.1');
 }
@@ -152,7 +152,6 @@ function wp_launcher_customize_register($wp_customize)
   ));
 
   $wp_customize->add_control(new WP_Launcher_Customize_Control_Textarea($wp_customize, 'wp-launcher-customize-header-navigation', array(
-    'label' => 'Designer',
     'section' => 'wp-launcher-customize-header-navigation',
     'settings' => 'wp-launcher-customize-header-menu-arrange',
     'type' => 'wp-launcher-textarea',
