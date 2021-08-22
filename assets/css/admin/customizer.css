@@ -1,0 +1,14 @@
+.row .col-12 div span.dashicons {
+  cursor: pointer;
+  position: relative;
+}
+
+.row .col-12 div span.dashicons .setting-panel {
+  cursor: default;
+  position: absolute;
+  background-color: green;
+  right: 0;
+  width: 270px;
+  bottom: 20px;
+  display: none;
+}

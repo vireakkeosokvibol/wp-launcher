@@ -1,8 +1,0 @@
-.container .row .dropzone {
-  height: 50px;
-  line-height: 50px;
-}
-.container .row .dropover {
-  outline-offset: -5px;
-  outline: dashed #ccc 1px;
-}

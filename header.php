@@ -14,7 +14,7 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown" style="justify-content: <?php echo get_theme_mod('header-menu-arrange', 'flex-start'); ?>;">
         <ul class="navbar-nav">
-        <?php wp_launcher_display_menu('header-menu'); ?>
+        
         </ul>
       </div>
     </div>
