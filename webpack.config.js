@@ -1,8 +1,8 @@
 const path = require('path');
 
- const admin = {
+ const adminCustomizer = {
   mode: 'production',
-  entry: './assets/ts/admin/index.ts',
+  entry: './assets/ts/admin/customizer/customizer.ts',
   module: {
     rules: [
       {
@@ -16,9 +16,9 @@ const path = require('path');
     extensions: ['.tsx', '.ts', '.js'],
   },
   output: {
-    filename: './js/admin/bundle.js',
+    filename: './js/admin/customizer/bundle.js',
     path: path.resolve(__dirname, 'assets'),
   },
 };
 
-module.exports = [admin]
+module.exports = [adminCustomizer]

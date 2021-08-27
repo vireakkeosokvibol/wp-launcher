@@ -1,3 +1,6 @@
+.row .col-12 .header-customizer-display {
+  box-sizing: border-box;
+}
 .row .col-12 div span.dashicons {
   cursor: pointer;
   position: relative;
