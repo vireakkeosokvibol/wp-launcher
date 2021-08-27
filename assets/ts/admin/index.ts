@@ -1,20 +1,45 @@
+/**
+ * Declare empty variable wp for Wordpress javascript theme customizer api
+ * see https://developer.wordpress.org/themes/customize-api/the-customizer-javascript-api/
+*/
+declare const wp: any;
+
+/**
+ * Interface for customizer object to render to html
+*/
+export interface customizerType {
+  container: {
+    column: {
+      span: number,
+      html: string
+    }[]
+  }
+}
+
+/**
+ * Start jQuery when html dom is already loaded.
+*/
 jQuery(function ($) {
-  let htmlObjects = [];
+
+  let htmlObjects: customizerType[] = [];
+
   try {
-    const html = $('#header-customizer').val()
+    
+    const html: string = $('#header-customizer').val().toString();
     
     if (html && html !== '' && html !== '[]') {
       htmlObjects = JSON.parse(html);
       console.log(htmlObjects);
     }
+
   } catch (error) {
     console.log(error);
   }
 
-  function render_htmlObject(apply = true) {
+  function render_htmlObject(apply: boolean = true) {
 
     if (apply === true) {
-      wp.customize('header-section-customizer', function (setting) {
+      wp.customize('header-section-customizer', function (setting: any) {
         setting.set(JSON.stringify(htmlObjects));
       });
     }
@@ -43,7 +68,7 @@ jQuery(function ($) {
               )
             ).append(
               $('<span class="dashicons dashicons-no"></span>').on('click', function () {
-                htmlObjects.splice(index, 1);
+                htmlObjects.splice(parseInt(index), 1);
                 render_htmlObject();
               })
             )

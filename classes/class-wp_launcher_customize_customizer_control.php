@@ -16,7 +16,7 @@ class WP_Launcher_Customize_Customizer_Control extends WP_Customize_Control
   {
     wp_enqueue_style('bootstrap', get_template_directory_uri() . '/assets/css/bootstrap.min.css', array(), '5.1');
     wp_enqueue_style('customizer', get_template_directory_uri() . '/assets/css/admin/customizer.css', array(), '0.1');
-    wp_enqueue_script('customizer', get_template_directory_uri() . '/assets/js/admin/customizer.js', array(), '0.1', true);
+    wp_enqueue_script('customizer', get_template_directory_uri() . '/assets/js/admin/bundle.js', array(), '0.1', true);
   }
 
   public function render_content(): void
