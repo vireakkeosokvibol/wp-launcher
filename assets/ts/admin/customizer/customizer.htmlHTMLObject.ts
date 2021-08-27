@@ -1,6 +1,5 @@
 import { customizerType } from './customizer.type';
 import * as $ from 'jquery';
-import { dragleave, dragover, drop } from './customizer.dragdrop';
 
 
 /**
@@ -12,7 +11,7 @@ declare const wp: any;
 export function renderHTMLObject(apply: boolean = true, htmlObjects: customizerType[]) {
 
   if (apply === true) {
-    wp.customize('header-section-customizer', function (setting: any) {
+    wp.customize('header-section-customizer', (setting: any) => {
       setting.set(JSON.stringify(htmlObjects));
     });
   }
@@ -20,11 +19,6 @@ export function renderHTMLObject(apply: boolean = true, htmlObjects: customizerT
   const render: JQuery<HTMLElement> = $('.header-customizer-display');
 
   render.html('');
-
-  render.on('dragover', dragover);
-
-  render.on('dragleave', dragleave);
-  render.on('drop', drop);
 
   if (htmlObjects.length === 0) {
     render.append('<div class="col-12 empty-component" style="font-style: italic; padding: 25px 10px; color: #aaaaaa;">Add a container to start customizing.</div>');
