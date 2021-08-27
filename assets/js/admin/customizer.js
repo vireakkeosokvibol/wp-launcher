@@ -1,6 +1,16 @@
 jQuery(function ($) {
-  const htmlObjects =  JSON.parse($('#header-customizer').val()) || [];
-  
+  let htmlObjects = [];
+  try {
+    const html = $('#header-customizer').val()
+    
+    if (html && html !== '' && html !== '[]') {
+      htmlObjects = JSON.parse(html);
+      console.log(htmlObjects);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+
   function render_htmlObject(apply = true) {
 
     if (apply === true) {
@@ -43,8 +53,7 @@ jQuery(function ($) {
           )
         )
       );
-
-      for(const index2 in htmlObjects[index].container.column) {
+      for (const index2 in htmlObjects[index].container.column) {
         render.find('.row .col-12 .row:eq(' + index + ')').append(
           $('<div class="col-' + htmlObjects[index].container.column[index2].span + '" style="height: 30px; border: 1px dashed #efefef;">asd</div>')
         )
@@ -65,7 +74,6 @@ jQuery(function ($) {
         ]
       }
     });
-    console.log()
     render_htmlObject();
   })
 
