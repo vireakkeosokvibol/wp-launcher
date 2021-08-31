@@ -7,13 +7,14 @@ export function dragover(event: JQuery.DragOverEvent): void {
   event.preventDefault();
   const draggingElement: JQuery<HTMLElement> = $('.dragging');
   if (draggingElement.length > 0) {
-    $(event.currentTarget).css('border', '1px dashed #666666');
+    // $(event.currentTarget).css('border', '1px dashed #666666');
   }
 }
 
 export function dragleave(event: JQuery.DragLeaveEvent): void {
   event.originalEvent.dataTransfer.setData('element', null);
   $(event.currentTarget).css('border', 'none');
+  console.log('leave')
 }
 
 export function dragstart(event: JQuery.DragStartEvent): void {

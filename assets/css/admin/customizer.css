@@ -9,9 +9,10 @@
 .row .col-12 div span.dashicons .setting-panel {
   cursor: default;
   position: absolute;
-  background-color: green;
+  background-color: #ffffff;
   right: 0;
-  width: 270px;
-  bottom: 20px;
+  z-index: 1;
+  box-shadow: 0 0 10px #666;
+  top: 30px;
   display: none;
 }

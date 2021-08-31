@@ -30,12 +30,16 @@ export function renderHTMLObject(apply: boolean = true, htmlObjects: customizerT
       $('<div class="row g-1 p-1"></div>').append(
         $('<div class="col-12" style="border: 1px solid #efefef; box-sizing: border-box;"></div>').append(
           $('<div style="display: flex; font-size: 11px;">Container<span style="flex: 1 1 auto;"></span></div>').append(
-            $('<span class="dashicons dashicons-edit"></span>').on('click', (event: JQuery.ClickEvent) => {
+            $('<span class="dashicons dashicons-ellipsis"></span>').on('click', (event: JQuery.ClickEvent) => {
               $(event.currentTarget).children('.setting-panel').show();
             }).append(
               $('<span class="setting-panel"></span>').append('<button type="button" class="button">Close</button>').on('click', (event: JQuery.ClickEvent) => {
                 event.preventDefault();
-              })
+              }).append(
+                $('<div class="row"></div>').append().css('width', (): string => {
+                  return $('.header-customizer-display').css('width');
+                })
+              )
             )
           ).append(
             $('<span class="dashicons dashicons-no"></span>').on('click', () => {
@@ -44,14 +48,14 @@ export function renderHTMLObject(apply: boolean = true, htmlObjects: customizerT
             })
           )
         ).append(
-          $('<div class="row g-1 p-1"></div>').append(
+          $('<div class="row g-1 p-1 container"></div>').append(
           )
         )
       )
     );
     for (const index2 in htmlObjects[index].container.column) {
-      render.find('.row .col-12 .row:eq(' + index + ')').append(
-        $('<div class="col-' + htmlObjects[index].container.column[index2].span + '" style="height: 30px; border: 1px dashed #efefef;"></div>')
+      render.find('.row .col-12 .row.container:eq(' + index + ')').append(
+        $('<div class="col-' + htmlObjects[index].container.column[index2].span + '" style="height: 50px; border: 1px dashed #efefef;"></div>')
       )
     }
   }
